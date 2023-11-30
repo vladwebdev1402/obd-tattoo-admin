@@ -1,0 +1,34 @@
+.row {
+    position: relative;
+    display: grid;
+    
+    padding: 5px;
+
+    &:nth-child(2n) {
+        background-color: var(--gray-row);
+    }
+
+    &:hover:not(.row__title){
+        background-color: var(--gray);
+        cursor: pointer;
+        .row__delete {
+            opacity: 1;
+        }
+    }
+}
+
+.row__title {
+    background-color: var(--gray);
+}
+
+.row__delete {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../assets/icons/trash.svg);
+    right: 20px;
+    top: calc(50% - 10px);
+    opacity: 0;
+    transition: .3s;
+    background-color: transparent;
+}

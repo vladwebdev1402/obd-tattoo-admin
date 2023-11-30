@@ -1,0 +1,35 @@
+.category__head {
+    position: relative;
+    transition: all 0.4s ease-out;
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(#bb8c5f, 0.1);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        transition: .4s;
+        width: 16px;
+        height: 16px;
+        background-color: var(--orange);
+        right: 20px;
+        top: calc(50% - 8px);
+        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+}
+
+.categoty__body {
+    overflow: hidden;
+    transition: all 0.4s ease-out;
+    box-sizing: content-box;
+}
+
+.category_open {
+    .category__head {
+        &::after {
+            transform: rotate(180deg);
+        }
+    }
+}

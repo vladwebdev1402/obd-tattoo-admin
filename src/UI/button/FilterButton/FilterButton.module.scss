@@ -1,0 +1,34 @@
+.btn {
+    padding: 14px 24px;
+    line-height: 20px;
+    color: var(--orange);
+    font-size: 20px;
+    border: 2px solid var(--orange);
+    font-family: "Jost";
+    transition: 0.2s;
+    white-space: nowrap;
+  
+    @media (min-width: 992px) {
+      &:hover {
+        background-color: var(--orange);
+        color: var(--txt-white);
+      }
+  
+      &:active {
+        background-color: var(--dark-orange);
+        color: var(--txt-white);
+      }
+    }
+  
+    @media (max-width: 576px) {
+      padding: 7px 12px;
+      font-size: 15px;
+      line-height: 15px;
+    }
+  }
+  
+  .active {
+    background-color: var(--dark-orange);
+    color: var(--txt-white);
+  }
+  

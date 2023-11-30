@@ -1,0 +1,20 @@
+.switch {
+    margin-top: 60px;
+}
+
+.switch__category {
+    margin-top: 20px;
+}
+
+.switch__title {
+    font-size: 25px;
+
+}
+
+.switch__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    margin-top: 5px;
+}

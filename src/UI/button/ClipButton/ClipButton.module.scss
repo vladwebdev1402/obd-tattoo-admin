@@ -1,0 +1,87 @@
+.btnWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn {
+  background-color: var(--orange);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(
+    15px 0px,
+    15px calc(50% - 8px),
+    0px 50%,
+    15px calc(50% + 8px),
+    15px 100%,
+    calc(100% - 15px) 100%,
+    calc(100% - 15px) calc(50% + 8px),
+    100% 50%,
+    calc(100% - 15px) calc(50% - 8px),
+    calc(100% - 15px) 0px
+  );
+}
+.btn::after {
+  position: absolute;
+  content: "";
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  top: 2px;
+  left: 2px;
+  background-color: white;
+  clip-path: polygon(
+    15px 0px,
+    15px calc(50% - 7px),
+    2px 50%,
+    15px calc(50% + 7px),
+    15px 100%,
+    calc(100% - 15px) 100%,
+    calc(100% - 15px) calc(50% + 7px),
+    calc(100% - 2px) 50%,
+    calc(100% - 15px) calc(50% - 7px),
+    calc(100% - 15px) 0px
+  );
+  transition: 0.2s;
+}
+.textBtn {
+  color: #faf6f2;
+  white-space: nowrap;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.darkBtn {
+  .btn::after {
+    background-color: var(--dark-orange);
+  }
+
+  &:hover {
+    .btn::after {
+      background-color: var(--orange);
+    }
+  }
+}
+
+.lightBtn {
+  .textBtn {
+    color: var(--orange);
+  }
+  .btn::after {
+    background-color: #eeeeee;
+  }
+
+  &:hover {
+    .btn::after {
+      background-color: var(--orange);
+    }
+    .textBtn {
+      color: #faf6f2;
+    }
+  }
+}
