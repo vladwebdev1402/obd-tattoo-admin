@@ -2,6 +2,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import st from "./CategoryOperation.module.scss";
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
+  contanerRef?: React.RefObject<HTMLDivElement>;
 }
 const CategoryOperation: FC<Props> = ({
   className = "",
@@ -23,7 +24,7 @@ const CategoryOperation: FC<Props> = ({
       <h1 className={st.category__head} onClick={() => setOpen(!open)}>
         {title}
       </h1>
-      <div className={st.categoty__body} ref={ref}>
+      <div className={`${st.categoty__body}`} ref={ref}>
         {children}
       </div>
     </div>

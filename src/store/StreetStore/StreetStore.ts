@@ -1,11 +1,11 @@
-import INamePrompt from "@/types/INamePrompt";
 import { makeAutoObservable } from "mobx";
 
 import { configure } from "mobx";
-import NamePromtAPI from "./NamePromtAPI";
+import StreetAPI from "./StreetAPI";
+import IStreet from "@/types/IStreet";
 
-class IdNameStore {
-  data: INamePrompt[] = [];
+class StreetStore {
+  data: IStreet[] = [];
   isLoadingComplete: boolean = false;
   error: string = "";
 
@@ -16,11 +16,11 @@ class IdNameStore {
     });
   }
 
-  getAll = async (link: string) => {
+  getAll = async () => {
     this.isLoadingComplete = false;
     this.error = "";
     try {
-      this.data = await NamePromtAPI.getAll(link);
+      this.data = await StreetAPI.getAll();
       this.isLoadingComplete = true;
       this.error = "";
     } catch (e) {
@@ -35,11 +35,10 @@ class IdNameStore {
     }
   };
 
-  delete = async (link: string, _id: string) => {
+  delete = async ( _id: string) => {
     try {
-      const data = await NamePromtAPI.delete(link, _id);
-      this.data = this.data.filter((c) => c._id !== _id);
-      this.error = "";
+      const data = await StreetAPI.delete(_id);
+      this.data = this.data.filter((d) => d._id !== _id);
     } catch (e) {
       if (typeof e === "string") {
         this.error = e.toUpperCase();
@@ -52,9 +51,9 @@ class IdNameStore {
     }
   };
 
-  create = async (link: string, name: string, promt: string) => {
+  create = async (payload: IStreet) => {
     try {
-      const data = await NamePromtAPI.create(link, name, promt);
+      const data = await StreetAPI.create(payload);
       this.data.push(data);
       this.error = "";
     } catch (e) {
@@ -69,9 +68,9 @@ class IdNameStore {
     }
   };
 
-  edit = async (link: string, payload: INamePrompt) => {
+  edit = async (payload: IStreet) => {
     try {
-      const data = await NamePromtAPI.edit(link, payload);
+      const data = await StreetAPI.edit(payload);
       this.data = this.data.map((d) =>
         d._id === payload._id ? { ...d, ...payload } : d
       );
@@ -89,4 +88,4 @@ class IdNameStore {
   };
 }
 
-export default new IdNameStore();
+export default new StreetStore();

@@ -16,7 +16,7 @@ class IdNameStore {
     });
   }
 
-  getAll = async (link: string) => {
+  getAll = async (link: string): Promise<IIdName[]> => {
     this.isLoadingComplete = false;
     this.error = "";
 
@@ -34,6 +34,8 @@ class IdNameStore {
     } finally {
       this.isLoadingComplete = true;
     }
+
+    return this.data
   };
 
   delete = async (link: string, _id: string) => {

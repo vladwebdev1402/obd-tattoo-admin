@@ -4,7 +4,9 @@ import st from "./CreateContainer.module.scss";
 import CategoryOperation from "@/UI/CategoryOperation/CategoryOperation";
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onCreate: () => void;
+  ref?: React.RefObject<HTMLDivElement>;
 }
+
 const CreateContainer: FC<Props> = ({
   onCreate,
   className = "",

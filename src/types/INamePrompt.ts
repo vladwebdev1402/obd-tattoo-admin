@@ -1,5 +1,5 @@
-export default interface INamePrompt {
-    _id: string;
-    name: string;
+import IIdName from "./IIdName";
+
+export default interface INamePrompt extends IIdName {
     promt: string;
 }
