@@ -1,4 +1,3 @@
-import Input from "@/UI/input/Input";
 import st from "./NamePromtPage.module.scss";
 import React, { FC, useEffect, useState } from "react";
 import Create from "./components/Create";
