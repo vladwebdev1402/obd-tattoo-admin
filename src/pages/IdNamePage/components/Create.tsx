@@ -15,7 +15,7 @@ const Create: FC<Props> = ({ link }) => {
 
   const onCreate = () => {
     if (name != "") {
-      IdNameStore.create(link, name);
+      IdNameStore.create(link, { name: name, _id: "" });
       setName("");
     }
   };

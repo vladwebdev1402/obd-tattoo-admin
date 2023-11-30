@@ -19,7 +19,11 @@ const Create: FC<Props> = ({ link }) => {
   };
   const onCreate = () => {
     if (create.name !== "" && create.promt !== "") {
-      NamePromtStore.create(link, create.name, create.promt);
+      NamePromtStore.create(link, {
+        _id: "",
+        name: create.name,
+        promt: create.promt,
+      });
       setCreate({ name: "", promt: "" });
     }
   };

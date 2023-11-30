@@ -1,3 +1,4 @@
+import BrandPage from "@/pages/BrandPage/BrandPage";
 import IdNamePage from "@/pages/IdNamePage/IdNamePage";
 import MainPage from "@/pages/MainPage/MainPage";
 import NamePromtPage from "@/pages/NamePromtPage";
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="delivery" element={<NamePromtPage link={"delivery"} />} />
       <Route path="payment" element={<NamePromtPage link={"payment"} />} />
       <Route path="street" element={<StreetPage />} />
+      <Route path="brand" element={<BrandPage />} />
     </Route>
   )
 );
