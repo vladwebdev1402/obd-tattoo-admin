@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import st from "./CityPage.module.scss";
+import React, { useEffect, useState, FC } from "react";
+import st from "./IdNamePage.module.scss";
 import { observer } from "mobx-react-lite";
-import CityStore from "@/store/CityStore/CityStore";
 import SearchStore from "@/store/SearchStore/SearchStore";
 import Input from "@/UI/input/Input";
 import DataContainer from "@/UI/DataContainer/DataContainer";
@@ -9,12 +8,17 @@ import CreateContainer from "@/components/CreateContainer/CreateContainer";
 import HeadDataContainer from "@/components/HeadDataContainer/HeadDataContainer";
 import TableRow from "@/components/TableRow/TableRow";
 import Modal from "@/UI/modal/Modal";
-const CityPage = observer(() => {
+import IdNameStore from "@/store/IdNameStore";
+import { useLocation } from "react-router-dom";
+interface Props {
+  link: string;
+}
+const IdNamePage: FC<Props> = observer(({ link }) => {
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState("");
-
   const [filterName, setFilterName] = useState("");
+  const location = useLocation().pathname.split("/").at(-1) ?? "";
 
   const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,21 +27,21 @@ const CityPage = observer(() => {
 
   const onCreate = () => {
     if (name != "") {
-      CityStore.createCity(name);
+      IdNameStore.create(link, name);
       setName("");
     }
   };
 
   const onDelete = (_id: string) => {
-    CityStore.deleteCity(_id);
+    IdNameStore.delete(link, _id);
   };
 
   useEffect(() => {
-    CityStore.getAll();
-  }, []);
+    IdNameStore.getAll(link);
+  }, [link]);
 
   useEffect(() => {
-    const c = CityStore.city.filter((c) => c._id === current)[0] ?? {
+    const c = IdNameStore.data.filter((c) => c._id === current)[0] ?? {
       name: "",
     };
     setFilterName(c.name);
@@ -66,30 +70,30 @@ const CityPage = observer(() => {
 
       <DataContainer
         className={st.city__body}
-        error={CityStore.error}
-        isLoadingComplete={CityStore.isLoadingComplete}
+        error={IdNameStore.error}
+        isLoadingComplete={IdNameStore.isLoadingComplete}
       >
         <TableRow fr={2} isTitle>
           <div>_id</div>
           <div>name</div>
         </TableRow>
 
-        {CityStore.city
-          .filter((city) =>
-            city.name.toLowerCase().includes(SearchStore.value.toLowerCase())
+        {IdNameStore.data
+          .filter((data) =>
+            data.name.toLowerCase().includes(SearchStore.value.toLowerCase())
           )
-          .map((city) => (
+          .map((data) => (
             <TableRow
               fr={2}
-              key={city._id}
-              onDelete={() => onDelete(city._id)}
+              key={data._id}
+              onDelete={() => onDelete(data._id)}
               onOpen={() => {
-                setCurrent(city._id);
+                setCurrent(data._id);
                 setOpen(true);
               }}
             >
-              <div>{city._id}</div>
-              <div>{city.name}</div>
+              <div>{data._id}</div>
+              <div>{data.name}</div>
             </TableRow>
           ))}
       </DataContainer>
@@ -97,7 +101,7 @@ const CityPage = observer(() => {
         <Modal
           setOpen={setOpen}
           onEdit={() => {
-            CityStore.editCity({ name: filterName, _id: current });
+            IdNameStore.edit(link, { name: filterName, _id: current });
           }}
         >
           <Input
@@ -113,4 +117,4 @@ const CityPage = observer(() => {
   );
 });
 
-export default CityPage;
+export default IdNamePage;
