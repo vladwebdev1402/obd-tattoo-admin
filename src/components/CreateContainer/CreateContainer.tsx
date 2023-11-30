@@ -12,7 +12,11 @@ const CreateContainer: FC<Props> = ({
   ...props
 }) => {
   return (
-    <CategoryOperation title={"Создать"} className={`${className}`} {...props}>
+    <CategoryOperation
+      title={"Создать"}
+      className={`${className} ${st.container}`}
+      {...props}
+    >
       {children}
       <ClipButton onClick={() => onCreate()} theme="dark" className={st.btn}>
         Создать

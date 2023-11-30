@@ -12,6 +12,8 @@ class SearchStore {
     setValue = (value: string) => {
         this.value = value;
     }
+
+    getValue = () : string => this.value.toLowerCase();
 }
 
 export default new SearchStore();

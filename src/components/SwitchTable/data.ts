@@ -13,14 +13,19 @@ export const tables: ITable[] = [
     },
     { 
         class: true,
+        link: "category",
+        name: "Категории"
+    },
+    { 
+        class: true,
         link: "brand",
         name: "Бренды"
     },
     { 
         class: true,
-        link: "category",
-        name: "Категории"
-    },
+        link: "status",
+        name: "Статусы заказа"
+    },    
     { 
         class: true,
         link: "delivery",
@@ -36,11 +41,7 @@ export const tables: ITable[] = [
         link: "service",
         name: "Доп. услуги"
     },
-    { 
-        class: true,
-        link: "status",
-        name: "Статусы заказа"
-    },
+    
     { 
         class: true,
         link: "promocode",
