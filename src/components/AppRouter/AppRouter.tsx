@@ -2,7 +2,9 @@ import BrandPage from "@/pages/BrandPage/BrandPage";
 import IdNamePage from "@/pages/IdNamePage/IdNamePage";
 import MainPage from "@/pages/MainPage/MainPage";
 import NamePromtPage from "@/pages/NamePromtPage";
+import PromocodePage from "@/pages/PromocodePage/PromocodePage";
 import Root from "@/pages/Root/Root";
+import ServicePage from "@/pages/ServicesPage/ServicePage";
 import StreetPage from "@/pages/StreetPage/StreetPage";
 import React from "react";
 import {
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
       <Route path="payment" element={<NamePromtPage link={"payment"} />} />
       <Route path="street" element={<StreetPage />} />
       <Route path="brand" element={<BrandPage />} />
+      <Route path="promocode" element={<PromocodePage />} />
+      <Route path="service" element={<ServicePage />} />
     </Route>
   )
 );
