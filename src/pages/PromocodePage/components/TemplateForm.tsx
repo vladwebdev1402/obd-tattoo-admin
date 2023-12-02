@@ -1,49 +1,52 @@
 import Input from "@/UI/input/Input";
 import { IPromocode } from "@/types/IPromocode";
+import { ITemplateFormProps } from "@/types/Props";
+import { StringIsNumber } from "@/utils/StringIsNumber";
 import React, { FC } from "react";
 
-interface Props {
-  promocode: IPromocode;
-  setPromocode: (value: IPromocode) => void;
-  submit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+interface Props extends ITemplateFormProps<IPromocode> {}
 
-const TemplateForm: FC<Props> = ({ promocode, setPromocode, submit }) => {
+const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
   return (
     <form onSubmit={submit}>
       <Input
         title="name"
-        value={promocode.name}
+        value={obj.name}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setPromocode({ ...promocode, name: e.target.value })
+          setObj({ ...obj, name: e.target.value })
         }
       />
       <Input
         title="promocode"
-        value={promocode.promocode}
+        value={obj.promocode}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setPromocode({ ...promocode, promocode: e.target.value })
+          setObj({ ...obj, promocode: e.target.value })
         }
       />
       <Input
         title="description"
-        value={promocode.description}
+        value={obj.description}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setPromocode({ ...promocode, description: e.target.value })
+          setObj({ ...obj, description: e.target.value })
         }
       />
       <Input
         title="discount"
-        value={promocode.discount.toString()}
+        value={obj.discount.toString()}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setPromocode({ ...promocode, discount: Number(e.target.value) })
+          setObj({
+            ...obj,
+            discount: Number(
+              StringIsNumber(obj.discount.toString(), e.target.value)
+            ),
+          })
         }
       />
       <Input
         title="image"
-        value={promocode.image}
+        value={obj.image}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setPromocode({ ...promocode, image: e.target.value })
+          setObj({ ...obj, image: e.target.value })
         }
       />
     </form>

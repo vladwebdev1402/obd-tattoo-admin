@@ -45,8 +45,8 @@ const Create = () => {
     <CreateContainer onCreate={onCreate}>
       <TemplateForm
         submit={submitEvent}
-        setPromocode={setPromocode}
-        promocode={promocode}
+        setObj={setPromocode}
+        obj={promocode}
       />
     </CreateContainer>
   );

@@ -42,8 +42,8 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
   return (
     <Modal onEdit={onEdit} setOpen={setOpen}>
       <TemplateForm
-        setPromocode={setPromocode}
-        promocode={promocode}
+        setObj={setPromocode}
+        obj={promocode}
         submit={submitEvent}
       />
     </Modal>
