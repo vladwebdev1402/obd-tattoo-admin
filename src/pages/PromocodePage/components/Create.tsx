@@ -16,11 +16,6 @@ const Create = () => {
     image: "IMAGE",
   });
 
-  const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onCreate();
-  };
-
   const onCreate = () => {
     if (
       promocode.name &&
@@ -43,11 +38,7 @@ const Create = () => {
 
   return (
     <CreateContainer onCreate={onCreate}>
-      <TemplateForm
-        submit={submitEvent}
-        setObj={setPromocode}
-        obj={promocode}
-      />
+      <TemplateForm submit={onCreate} setObj={setPromocode} obj={promocode} />
     </CreateContainer>
   );
 };

@@ -3,48 +3,42 @@ import Input from "@/UI/input/Input";
 import Modal from "@/UI/modal/Modal";
 import IdNameStore from "@/store/IdNameStore";
 import StreetStore from "@/store/StreetStore";
-import IDropdownValue from "@/types/IDropdownValue";
 import { ParseToDropdown } from "@/utils/ParseToDropdown";
 import React, { FC, useState } from "react";
 import st from "./st.module.scss";
+import TemplateForm from "./TemplateForm";
+import IStreet from "@/types/IStreet";
 interface Props {
   setOpen: (value: boolean) => void;
   current: string;
 }
 const Edit: FC<Props> = ({ setOpen, current }) => {
-  const street = StreetStore.data.filter((s) => s._id === current)[0];
-  const city2 = IdNameStore.data.filter((s) => s._id === street.city)[0];
-  const [name, setName] = useState(street.name);
-  const [city, setCity] = useState<IDropdownValue | null>({
-    name: city2.name,
-    value: city2._id,
+  const curStreet = StreetStore.data.filter((s) => s._id === current)[0];
+  const curCity = IdNameStore.data.filter((s) => s._id === curStreet.city)[0];
+
+  const [street, setStreet] = useState<IStreet>({
+    ...curStreet,
   });
+  const [city, setCity] = useState({ name: curCity.name, value: curCity._id });
+
   const onEdit = () => {
-    if (name && city) {
+    if (street.name && city) {
       StreetStore.edit({
         ...street,
         city: city.value,
-        name: name,
+        name: street.name,
       });
     }
   };
 
   return (
     <Modal onEdit={onEdit} setOpen={setOpen}>
-      <DropdownMenu
-        placeholder={"Выберите город"}
-        values={ParseToDropdown(IdNameStore.data)}
+      <TemplateForm
         setCurrent={setCity}
         current={city}
-        title="city"
-      />
-      <Input
-        className={st.create__input}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setName(e.target.value)
-        }
-        value={name}
-        title="name"
+        submit={onEdit}
+        setObj={setStreet}
+        obj={street}
       />
     </Modal>
   );

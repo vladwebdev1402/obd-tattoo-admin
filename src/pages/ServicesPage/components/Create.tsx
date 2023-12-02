@@ -1,7 +1,7 @@
 import CreateContainer from "@/components/CreateContainer/CreateContainer";
 import React, { useState } from "react";
 import TemplateForm from "./TemplateForm";
-import IService from "@/types/IService";
+import IService from "@/types/IServise";
 import ServiceStore from "@/store/ServiceStore/ServiceStore";
 const Create = () => {
   const [service, setService] = useState<IService>({
@@ -14,11 +14,6 @@ const Create = () => {
       interest: 0,
     },
   });
-
-  const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onCreate();
-  };
 
   const onCreate = () => {
     if (
@@ -40,7 +35,7 @@ const Create = () => {
   };
   return (
     <CreateContainer onCreate={onCreate}>
-      <TemplateForm submit={submitEvent} obj={service} setObj={setService} />
+      <TemplateForm submit={onCreate} obj={service} setObj={setService} />
     </CreateContainer>
   );
 };

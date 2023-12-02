@@ -2,6 +2,7 @@ import Input from "@/UI/input/Input";
 import Modal from "@/UI/modal/Modal";
 import NamePromtStore from "@/store/NamePromtStore";
 import React, { FC, useState } from "react";
+import TemplateForm from "./TemplateForm";
 interface Props {
   link: string;
   setOpen: (value: boolean) => void;
@@ -12,8 +13,7 @@ const Edit: FC<Props> = ({ link, setOpen, current }) => {
   const obj = NamePromtStore.data.filter((d) => d._id === current)[0];
 
   const [editObj, setEditObj] = useState({
-    name: obj.name,
-    promt: obj.promt,
+    ...obj,
   });
 
   const onEdit = async () => {
@@ -27,20 +27,7 @@ const Edit: FC<Props> = ({ link, setOpen, current }) => {
   };
   return (
     <Modal onEdit={onEdit} setOpen={setOpen}>
-      <Input
-        title="name"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setEditObj({ ...editObj, name: e.target.value })
-        }
-        value={editObj.name}
-      />
-      <Input
-        title="promt"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setEditObj({ ...editObj, promt: e.target.value })
-        }
-        value={editObj.promt}
-      />
+      <TemplateForm submit={onEdit} obj={editObj} setObj={setEditObj} />
     </Modal>
   );
 };

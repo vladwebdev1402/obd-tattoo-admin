@@ -2,7 +2,7 @@ import DataContainer from "@/UI/DataContainer/DataContainer";
 import TableRow from "@/components/TableRow/TableRow";
 import SearchStore from "@/store/SearchStore/SearchStore";
 import ServiceStore from "@/store/ServiceStore/ServiceStore";
-import IService from "@/types/IService";
+import IService from "@/types/IServise";
 import { IDataProps } from "@/types/Props";
 import { observer } from "mobx-react-lite";
 import st from "./st.module.scss";

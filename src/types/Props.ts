@@ -1,3 +1,5 @@
+import IDropdownValue from "./IDropdownValue";
+
 export interface IDataProps {
     link?: string;
     setCurrent: (current: string) => void;
@@ -16,5 +18,7 @@ export interface IEditrops {
 export interface ITemplateFormProps<T> {
     obj: T;
     setObj: (value: T) => void;
-    submit: (e: React.FormEvent<HTMLFormElement>) => void;
+    submit?: () => void;
+    current?: IDropdownValue | null;
+    setCurrent?: (value: IDropdownValue) => void;
 }

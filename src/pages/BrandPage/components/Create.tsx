@@ -2,9 +2,11 @@ import Input from "@/UI/input/Input";
 import CreateContainer from "@/components/CreateContainer/CreateContainer";
 import BrandStore from "@/store/BrandStore/BrandStore";
 import React, { useState } from "react";
+import TemplateForm from "./TemplateForm";
 
 const Create = () => {
   const [create, setCreate] = useState({
+    _id: "",
     image: "IMAGE",
     name: "",
   });
@@ -18,20 +20,7 @@ const Create = () => {
 
   return (
     <CreateContainer onCreate={onCreate}>
-      <Input
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setCreate({ ...create, name: e.target.value })
-        }
-        value={create.name}
-        title="name"
-      />
-      <Input
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setCreate({ ...create, image: e.target.value })
-        }
-        value={create.image}
-        title="image"
-      />
+      <TemplateForm submit={onCreate} setObj={setCreate} obj={create} />
     </CreateContainer>
   );
 };

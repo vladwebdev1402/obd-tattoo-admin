@@ -21,11 +21,6 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
     image: obj.description,
   });
 
-  const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onEdit();
-  };
-
   const onEdit = async () => {
     if (
       promocode.name &&
@@ -41,11 +36,7 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
 
   return (
     <Modal onEdit={onEdit} setOpen={setOpen}>
-      <TemplateForm
-        setObj={setPromocode}
-        obj={promocode}
-        submit={submitEvent}
-      />
+      <TemplateForm setObj={setPromocode} obj={promocode} submit={onEdit} />
     </Modal>
   );
 };

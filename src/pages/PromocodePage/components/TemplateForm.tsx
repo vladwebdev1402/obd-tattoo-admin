@@ -1,3 +1,4 @@
+import ContainerTemplateForm from "@/UI/ContainerTemplateForm/ContainerTemplateForm";
 import Input from "@/UI/input/Input";
 import { IPromocode } from "@/types/IPromocode";
 import { ITemplateFormProps } from "@/types/Props";
@@ -8,7 +9,7 @@ interface Props extends ITemplateFormProps<IPromocode> {}
 
 const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
   return (
-    <form onSubmit={submit}>
+    <ContainerTemplateForm onEvent={submit}>
       <Input
         title="name"
         value={obj.name}
@@ -49,7 +50,7 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
           setObj({ ...obj, image: e.target.value })
         }
       />
-    </form>
+    </ContainerTemplateForm>
   );
 };
 

@@ -1,6 +1,6 @@
 import Modal from "@/UI/modal/Modal";
 import ServiceStore from "@/store/ServiceStore/ServiceStore";
-import IService from "@/types/IService";
+import IService from "@/types/IServise";
 import { IEditrops } from "@/types/Props";
 import React, { FC, useState } from "react";
 import TemplateForm from "./TemplateForm";
@@ -11,11 +11,6 @@ const Edit: FC<Props> = ({ current, setOpen }) => {
   const curService = ServiceStore.data.filter((s) => s._id === current)[0];
 
   const [service, setService] = useState<IService>({ ...curService });
-
-  const submitEvent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onEdit();
-  };
 
   const onEdit = () => {
     if (
@@ -38,7 +33,7 @@ const Edit: FC<Props> = ({ current, setOpen }) => {
 
   return (
     <Modal setOpen={setOpen} onEdit={onEdit}>
-      <TemplateForm submit={submitEvent} obj={service} setObj={setService} />
+      <TemplateForm submit={onEdit} obj={service} setObj={setService} />
     </Modal>
   );
 };
