@@ -11,20 +11,29 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
   const brand = BrandStore.data.filter((b) => b._id === current)[0];
   const [edit, setEdit] = useState({
     ...brand,
+    image: new FormData(),
   });
 
-  const onEdit = () => {
-    if (edit.name && edit.image) {
-      BrandStore.edit({
+  const onEdit = async () => {
+    if (edit.name && edit.image.getAll.length > 0) {
+      const filename = await BrandStore.image(edit.image);
+      console.log(filename);
+      await BrandStore.edit({
         ...brand,
         ...edit,
+        image: filename,
       });
     }
   };
 
   return (
     <Modal onEdit={onEdit} setOpen={setOpen}>
-      <TemplateForm submit={onEdit} setObj={setEdit} obj={edit} />
+      <TemplateForm
+        submit={onEdit}
+        setObj={setEdit}
+        obj={edit}
+        currImage={brand.image}
+      />
     </Modal>
   );
 };

@@ -1,5 +1,9 @@
 import IIdName from "./IIdName";
 
-export default interface IBrand extends  IIdName {
+export interface IBrand extends IIdName {
     image: string;
+}
+
+export interface IBrandImage extends IIdName {
+    image: FormData;
 }

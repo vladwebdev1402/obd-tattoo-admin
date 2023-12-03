@@ -10,8 +10,8 @@ const StreetPage = observer(() => {
   const [open, setOpen] = useState(false);
   const [currentId, setcurrent] = useState("");
   useEffect(() => {
-    StreetStore.getAll();
     IdNameStore.getAll("city");
+    StreetStore.getAll();
     SearchStore.setValue("");
   }, []);
 

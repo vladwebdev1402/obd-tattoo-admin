@@ -1,7 +1,7 @@
 import CrudApi from "@/API/CrudApi";
 import IIdName from "@/types/IIdName";
 import IStore from "@/types/IStore";
-import { action, flow, makeObservable, observable } from "mobx";
+import {makeObservable, observable} from "mobx";
 
 export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
     data: T[] = [];
@@ -109,10 +109,6 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
             isLoadingComplete: observable,
             error: observable,
             data: observable,
-            // getAll: flow,
-            // delete: flow,
-            // create: flow,
-            // edit: flow,
         })
     }
     
@@ -172,7 +168,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
     try {
       const data = await CrudApi.edit<T>(this.link, payload);
       this.data = this.data.map((d) =>
-        d._id === payload._id ? { ...d, ...payload } : d
+        d._id === payload._id ? { ...d, ...data } : d
       );
       this.error = "";
     } catch (e) {
@@ -186,4 +182,23 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
       this.isLoadingComplete = true;
     }
   };
+
+  image = async (image: FormData): Promise<string> => {
+    try {
+      const filename = await CrudApi.image(this.link, image);
+      this.error = "";
+      return filename;
+    } catch (e) {
+      if (typeof e === "string") {
+        this.error = e.toUpperCase();
+      } else if (e instanceof Error) {
+        this.error = e.message;
+      }
+      this.isLoadingComplete = true;
+    } finally {
+      this.isLoadingComplete = true;
+    }
+  return "";
+}
+
 }

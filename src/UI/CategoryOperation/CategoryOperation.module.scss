@@ -21,9 +21,14 @@
 }
 
 .categoty__body {
+    height: 0;
     overflow: hidden;
     transition: all 0.4s ease-out;
     box-sizing: content-box;
+}
+
+.category__content {
+    padding: 10px 0;
 }
 
 .category_open {

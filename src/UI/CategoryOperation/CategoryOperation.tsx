@@ -10,12 +10,23 @@ const CategoryOperation: FC<Props> = ({
   title,
   ...props
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
+  const refContent = useRef<HTMLDivElement>(null);
+
+  var observer = new window.ResizeObserver(() => {
+    if (ref.current)
+      ref.current.style.height = `${ref.current!.scrollHeight}px`;
+  });
+
   useEffect(() => {
     if (open) ref.current!.style.height = `${ref.current!.scrollHeight}px`;
     else ref.current!.style.height = "0";
   }, [open]);
+
+  useEffect(() => {
+    if (refContent.current) observer.observe(refContent.current);
+  }, [refContent]);
   return (
     <div
       className={`${st.category} ${className} ${open ? st.category_open : ""}`}
@@ -25,7 +36,9 @@ const CategoryOperation: FC<Props> = ({
         {title}
       </h1>
       <div className={`${st.categoty__body}`} ref={ref}>
-        {children}
+        <div className={st.category__content} ref={refContent}>
+          {children}
+        </div>
       </div>
     </div>
   );

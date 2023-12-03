@@ -2,7 +2,7 @@ import DataContainer from "@/UI/DataContainer/DataContainer";
 import TableRow from "@/components/TableRow/TableRow";
 import BrandStore from "@/store/BrandStore/BrandStore";
 import SearchStore from "@/store/SearchStore/SearchStore";
-import IBrand from "@/types/IBrand";
+import { IBrand } from "@/types/IBrand";
 import { observer } from "mobx-react-lite";
 import React, { FC } from "react";
 
@@ -43,7 +43,9 @@ const Data: FC<Props> = observer(({ setOpen, setCurrent }) => {
             onDelete={() => BrandStore.delete(b._id)}
           >
             <div>{b._id}</div>
-            <div>{b.image}</div>
+            <div>
+              <img src={b.image} />
+            </div>
             <div>{b.name}</div>
           </TableRow>
         ))}

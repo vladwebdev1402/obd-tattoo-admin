@@ -16,6 +16,7 @@ export interface IEditrops {
 }
 
 export interface ITemplateFormProps<T> {
+    className?: string;
     obj: T;
     setObj: (value: T) => void;
     submit?: () => void;
