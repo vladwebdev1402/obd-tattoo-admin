@@ -24,14 +24,10 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
     <ContainerTemplateForm onEvent={submit}>
       <div className={st.images}>
         {currImage && (
-          <ImageContainer img={currImage} className_img={st.image__input} />
+          <ImageContainer img={currImage} className_img={st.image} />
         )}
 
-        <ImageInput
-          data={obj.image}
-          onChange={change}
-          className={st.image__input}
-        />
+        <ImageInput data={obj.image} onChange={change} className={st.image} />
       </div>
 
       <Input

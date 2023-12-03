@@ -5,7 +5,7 @@ import SearchStore from "@/store/SearchStore/SearchStore";
 import { IBrand } from "@/types/IBrand";
 import { observer } from "mobx-react-lite";
 import React, { FC } from "react";
-
+import st from "./st.module.scss";
 interface Props {
   setOpen: (value: boolean) => void;
   setCurrent: (value: string) => void;
@@ -43,7 +43,7 @@ const Data: FC<Props> = observer(({ setOpen, setCurrent }) => {
             onDelete={() => BrandStore.delete(b._id)}
           >
             <div>{b._id}</div>
-            <div>
+            <div className={st.image}>
               <img src={b.image} />
             </div>
             <div>{b.name}</div>

@@ -185,7 +185,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
 
   image = async (image: FormData): Promise<string> => {
     try {
-      const filename = await CrudApi.image(this.link, image);
+      const filename = await CrudApi.image(image);
       this.error = "";
       return filename;
     } catch (e) {

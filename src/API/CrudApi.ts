@@ -40,8 +40,8 @@ export default class CrudApi {
         return response;
     }
 
-    static image = async (link: string, image: FormData): Promise<string> => {
-      const response = await fetch(apiUrl + link + "/image", {
+    static image = async (image: FormData): Promise<string> => {
+      const response = await fetch(apiUrl + "image", {
         method: "POST",
         body: image,
       }).then((res) => res.json());

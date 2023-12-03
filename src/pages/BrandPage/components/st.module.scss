@@ -1,6 +1,12 @@
-.image__input {
+.image {
     width: 270px;
     height: 106px;
+    overflow: hidden;
+    img {
+        max-width: 100% ;
+        object-fit: cover;
+        object-position: center center;
+    }
 }
 
 .images {
