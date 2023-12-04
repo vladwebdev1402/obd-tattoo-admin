@@ -1,4 +1,3 @@
-import Input from "@/UI/input/Input";
 import Modal from "@/UI/modal/Modal";
 import NamePromtStore from "@/store/NamePromtStore";
 import React, { FC, useState } from "react";

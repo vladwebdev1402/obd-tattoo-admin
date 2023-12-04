@@ -1,6 +1,5 @@
-import { ITemplateFormProps } from "@/types/Props";
 import React, { FC } from "react";
-
+import st from "./ContainerTemplateForm.module.scss";
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onEvent?: () => void;
 }
@@ -13,7 +12,7 @@ const ContainerTemplateForm: FC<Props> = ({
 }) => {
   return (
     <form
-      className={`${className}`}
+      className={`${className} ${st.form}`}
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onEvent();

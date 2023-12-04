@@ -7,9 +7,13 @@
 .image {
     width: 392px;
     height: 230px;
-    margin-top: 10px;
 }
 
 .row {
     grid-template-columns: 1fr 100px 100px 100px 2fr 300px !important;
+}
+
+.inputs_namePromoDiscount {
+    display: flex;
+    gap: 20px;
 }

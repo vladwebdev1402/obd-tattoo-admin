@@ -6,7 +6,6 @@ import IStreet from "@/types/IStreet";
 import { ITemplateFormProps } from "@/types/Props";
 import { ParseToDropdown } from "@/utils/ParseToDropdown";
 import React, { FC } from "react";
-import st from "./st.module.scss";
 import { observer } from "mobx-react-lite";
 interface Props extends ITemplateFormProps<IStreet> {}
 const TemplateForm: FC<Props> = observer(
@@ -21,7 +20,6 @@ const TemplateForm: FC<Props> = observer(
           title="city"
         />
         <Input
-          className={st.create__input}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({ ...obj, name: e.target.value })
           }
