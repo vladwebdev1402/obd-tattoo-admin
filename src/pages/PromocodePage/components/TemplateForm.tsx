@@ -1,13 +1,26 @@
 import ContainerTemplateForm from "@/UI/ContainerTemplateForm/ContainerTemplateForm";
 import Input from "@/UI/input/Input";
-import { IPromocode } from "@/types/IPromocode";
+import { IPromocodeImage } from "@/types/IPromocode";
 import { ITemplateFormProps } from "@/types/Props";
 import { StringIsNumber } from "@/utils/StringIsNumber";
 import React, { FC } from "react";
+import st from "./st.module.scss";
+import ImageInput from "@/UI/input/image/ImageInput";
+import ImageContainer from "@/UI/ImageContainer/ImageContainer";
+import Textarea from "@/UI/textarea/Textarea";
+interface Props extends ITemplateFormProps<IPromocodeImage> {
+  currImage?: string;
+}
 
-interface Props extends ITemplateFormProps<IPromocode> {}
+const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
+  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const data = new FormData();
+    if (e.target.files) {
+      data.append("file", e.target.files[0]);
+      setObj({ ...obj, image: data });
+    } else setObj({ ...obj, image: data });
+  };
 
-const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
   return (
     <ContainerTemplateForm onEvent={submit}>
       <Input
@@ -24,10 +37,10 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
           setObj({ ...obj, promocode: e.target.value })
         }
       />
-      <Input
+      <Textarea
         title="description"
         value={obj.description}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           setObj({ ...obj, description: e.target.value })
         }
       />
@@ -43,13 +56,13 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
           })
         }
       />
-      <Input
-        title="image"
-        value={obj.image}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setObj({ ...obj, image: e.target.value })
-        }
-      />
+      <div className={st.images}>
+        {currImage && (
+          <ImageContainer img={currImage} className_img={st.image} />
+        )}
+
+        <ImageInput data={obj.image} onChange={change} className={st.image} />
+      </div>
     </ContainerTemplateForm>
   );
 };

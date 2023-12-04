@@ -15,7 +15,11 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
   });
 
   const onEdit = async () => {
-    if (edit.name && edit.image.getAll.length > 0) {
+    if (
+      edit.name &&
+      edit.image.getAll.length > 0 &&
+      !edit.image.getAll("file").includes("undefined")
+    ) {
       const filename = await BrandStore.image(edit.image);
       console.log(filename);
       await BrandStore.edit({

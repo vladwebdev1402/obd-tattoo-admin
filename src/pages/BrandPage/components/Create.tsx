@@ -11,7 +11,11 @@ const Create = () => {
   });
 
   const onCreate = async () => {
-    if (create.image && create.name) {
+    if (
+      create.image.getAll.length > 0 &&
+      !create.image.getAll("file").includes("undefined") &&
+      create.name
+    ) {
       const filename = await BrandStore.image(create.image);
       await BrandStore.create({ ...create, image: filename });
       setCreate({ ...create, name: "", image: new FormData() });

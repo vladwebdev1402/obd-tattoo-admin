@@ -2,36 +2,38 @@ import Input from "@/UI/input/Input";
 import CreateContainer from "@/components/CreateContainer/CreateContainer";
 import IdNameStore from "@/store/IdNameStore";
 import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
-import { IPromocode } from "@/types/IPromocode";
+import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
 import React, { useState } from "react";
 import TemplateForm from "./TemplateForm";
 
 const Create = () => {
-  const [promocode, setPromocode] = useState<IPromocode>({
+  const [promocode, setPromocode] = useState<IPromocodeImage>({
     _id: "",
     name: "",
     promocode: "",
     description: "",
     discount: 0,
-    image: "IMAGE",
+    image: new FormData(),
   });
 
-  const onCreate = () => {
+  const onCreate = async () => {
     if (
       promocode.name &&
       promocode.promocode &&
       promocode.description &&
-      promocode.image &&
+      promocode.image.getAll("file").length > 0 &&
+      !promocode.image.getAll("file").includes("indefined") &&
       promocode.discount > 0
     ) {
-      PromocodeStore.create(promocode);
+      const filename = await PromocodeStore.image(promocode.image);
+      PromocodeStore.create({ ...promocode, image: filename });
       setPromocode({
         _id: "",
         name: "",
         promocode: "",
         description: "",
         discount: 0,
-        image: "IMAGE",
+        image: new FormData(),
       });
     }
   };
