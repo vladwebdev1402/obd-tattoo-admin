@@ -22,4 +22,5 @@ export interface ITemplateFormProps<T> {
     submit?: () => void;
     current?: IDropdownValue | null;
     setCurrent?: (value: IDropdownValue) => void;
+    currImage?: string;
 }

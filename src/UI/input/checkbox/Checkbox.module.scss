@@ -1,0 +1,37 @@
+.title {
+    margin-left: 40px;
+    font-size: 17px;
+    color: var(--txt-gray2);
+    line-height: 15.6px;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border: 2px solid var(--orange);
+      left: 0;
+      top: calc(50% - 12.5px);
+      background-position: 2px 3px;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  .input {
+    display: none;
+  }
+  
+  .inputBox {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input:checked + .title::after {
+    background-color: var(--orange);
+    background-image: url(../../../assets/icons/checked.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+  }

@@ -28,7 +28,8 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
           this.data = await CrudApi.getAll<T>(link);
           this.isLoadingComplete = true;
           this.error = "";
-        } catch (e) {
+          return this.data;
+      } catch (e) {
           if (typeof e === "string") {
             this.error = e.toUpperCase();
           } else if (e instanceof Error) {
@@ -37,9 +38,9 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
           this.isLoadingComplete = true;
         } finally {
           this.isLoadingComplete = true;
-        }
+      }
+      return [];
     
-        return this.data
       };
 
     delete = async (link: string, _id: string) => {
@@ -119,6 +120,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
       this.data = await CrudApi.getAll<T>(this.link);
       this.isLoadingComplete = true;
       this.error = "";
+      return this.data;
     } catch (e) {
       if (typeof e === "string") {
         this.error = e.toUpperCase();
@@ -129,6 +131,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
     } finally {
       this.isLoadingComplete = true;
     }
+    return [];
   };
 
   delete = async ( _id: string) => {

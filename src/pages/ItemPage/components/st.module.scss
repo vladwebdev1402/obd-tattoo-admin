@@ -1,0 +1,20 @@
+.create__inputs1, .create__menus_and_checkbox {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.create__input1 {
+    flex-shrink: 2;
+}
+
+.image {
+    width: 289px;
+    height: 229px;
+}
+
+.images {
+   display: flex;
+   gap: 15px;
+   align-items: flex-start;
+}

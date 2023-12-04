@@ -7,8 +7,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   values: IDropdownValue[];
   current: IDropdownValue | null;
   setCurrent: (value: IDropdownValue) => void;
-  placeholder?: string;
+  placeholder: string;
+  inputPlaceholder: string;
   onOpen?: (value: boolean) => void;
+  change?: (value: string) => void;
 }
 
 const DropdownMenu: FC<Props> = ({
@@ -17,13 +19,23 @@ const DropdownMenu: FC<Props> = ({
   setCurrent,
   className = "",
   placeholder = "",
+  inputPlaceholder = "",
   onOpen = () => {},
+  change = () => {},
   title,
   ...props
 }) => {
   const ref = useRef(null);
   const [name, setName] = useState(current?.name ?? "");
   const { open, setOpen } = useClose(ref);
+
+  const getFilter = (obj: IDropdownValue) => {
+    return (
+      obj.name.toLowerCase().includes(name) ||
+      obj.value.toLowerCase().includes(name) ||
+      false
+    );
+  };
 
   useEffect(() => {
     onOpen(open);
@@ -49,20 +61,31 @@ const DropdownMenu: FC<Props> = ({
               e.stopPropagation()
             }
             className={st.menu__input}
-            placeholder={current?.name ?? "Поиск города"}
+            placeholder={
+              current && current.name ? current.name : inputPlaceholder
+            }
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setName(e.target.value)
             }
           />
         )}
-        {!open && <>{current === null ? placeholder : current.name}</>}
+        {!open && (
+          <>
+            {current === null || current.name == ""
+              ? placeholder
+              : current.name}
+          </>
+        )}
       </div>
 
       {open && (
         <div className={st.menu__body}>
+          {values.length === 0 && (
+            <div className={st.menu__item}>Список пуст</div>
+          )}
           {values
-            .filter((v) => v.name.toLowerCase().includes(name.toLowerCase()))
+            .filter((v) => getFilter(v))
             .map((v) => (
               <div
                 key={v.value}
@@ -70,6 +93,7 @@ const DropdownMenu: FC<Props> = ({
                 onClick={() => {
                   setOpen(!open);
                   setCurrent(v);
+                  change(v.value);
                 }}
               >
                 {v.name}

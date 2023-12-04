@@ -1,5 +1,6 @@
 import BrandPage from "@/pages/BrandPage/BrandPage";
 import IdNamePage from "@/pages/IdNamePage/IdNamePage";
+import ItemPage from "@/pages/ItemPage/ItemPage";
 import MainPage from "@/pages/MainPage/MainPage";
 import NamePromtPage from "@/pages/NamePromtPage";
 import PromocodePage from "@/pages/PromocodePage/PromocodePage";
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path="brand" element={<BrandPage />} />
       <Route path="promocode" element={<PromocodePage />} />
       <Route path="service" element={<ServicePage />} />
+      <Route path="item" element={<ItemPage />} />
     </Route>
   )
 );

@@ -20,7 +20,7 @@ const Edit: FC<Props> = observer(({ link, setOpen, current }) => {
 
   const onEdit = () => {
     if (obj.name != "") {
-      IdNameStore.create(link, obj);
+      IdNameStore.edit(link, obj);
       setObj({
         _id: "",
         name: "",

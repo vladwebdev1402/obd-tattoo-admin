@@ -14,6 +14,7 @@ const TemplateForm: FC<Props> = observer(
       <ContainerTemplateForm onEvent={submit}>
         <DropdownMenu
           placeholder={"Выберите город"}
+          inputPlaceholder="Поиск города"
           values={ParseToDropdown(IdNameStore.data)}
           setCurrent={setCurrent}
           current={current}
