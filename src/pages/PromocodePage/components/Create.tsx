@@ -5,6 +5,7 @@ import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
 import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
 import React, { useState } from "react";
 import TemplateForm from "./TemplateForm";
+import { CheckImage } from "@/utils/CheckImage";
 
 const Create = () => {
   const [promocode, setPromocode] = useState<IPromocodeImage>({
@@ -21,8 +22,7 @@ const Create = () => {
       promocode.name &&
       promocode.promocode &&
       promocode.description &&
-      promocode.image.getAll("file").length > 0 &&
-      !promocode.image.getAll("file").includes("indefined") &&
+      CheckImage(promocode.image) &&
       promocode.discount > 0
     ) {
       const filename = await PromocodeStore.image(promocode.image);

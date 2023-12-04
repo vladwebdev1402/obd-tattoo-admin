@@ -2,7 +2,7 @@ import DataContainer from "@/UI/DataContainer/DataContainer";
 import TableRow from "@/components/TableRow/TableRow";
 import SearchStore from "@/store/SearchStore/SearchStore";
 import ServiceStore from "@/store/ServiceStore/ServiceStore";
-import IService from "@/types/IServise";
+import { IService } from "@/types/IServise";
 import { IDataProps } from "@/types/Props";
 import { observer } from "mobx-react-lite";
 import st from "./st.module.scss";
@@ -51,7 +51,9 @@ const Data: FC<Props> = observer(({ setCurrent, setOpen }) => {
             <div>{s.description}</div>
             <div>{s.price.coin ?? 0}</div>
             <div>{s.price.interest ?? 0}</div>
-            <div>{s.image}</div>
+            <div>
+              <img src={s.image} alt="" />
+            </div>
           </TableRow>
         ))}
     </DataContainer>

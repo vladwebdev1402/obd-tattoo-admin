@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import TemplateForm from "./TemplateForm";
 import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
 import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
+import { CheckImage } from "@/utils/CheckImage";
 
 interface Props {
   setOpen: (value: boolean) => void;
@@ -26,8 +27,7 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
       promocode.name &&
       promocode.promocode &&
       promocode.description &&
-      promocode.image.getAll("file").length > 0 &&
-      !promocode.image.getAll("file").includes("indefined") &&
+      CheckImage(promocode.image) &&
       promocode.discount > 0
     ) {
       const filename = await PromocodeStore.image(promocode.image);

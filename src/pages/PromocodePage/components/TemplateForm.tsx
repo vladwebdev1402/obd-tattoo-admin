@@ -8,19 +8,12 @@ import st from "./st.module.scss";
 import ImageInput from "@/UI/input/image/ImageInput";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import Textarea from "@/UI/textarea/Textarea";
+import { ChangeImage } from "@/UI/input/image/ChangeImage";
 interface Props extends ITemplateFormProps<IPromocodeImage> {
   currImage?: string;
 }
 
 const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const data = new FormData();
-    if (e.target.files) {
-      data.append("file", e.target.files[0]);
-      setObj({ ...obj, image: data });
-    } else setObj({ ...obj, image: data });
-  };
-
   return (
     <ContainerTemplateForm onEvent={submit}>
       <Input
@@ -61,7 +54,11 @@ const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
           <ImageContainer img={currImage} className_img={st.image} />
         )}
 
-        <ImageInput data={obj.image} onChange={change} className={st.image} />
+        <ImageInput
+          data={obj.image}
+          onChange={ChangeImage(obj, setObj)}
+          className={st.image}
+        />
       </div>
     </ContainerTemplateForm>
   );

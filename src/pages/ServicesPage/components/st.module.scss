@@ -1,3 +1,15 @@
 .table__row {
-    grid-template-columns: 1fr 1fr 1fr 50px 80px 1fr !important;
+    grid-template-columns: 1fr 100px 2fr 50px 80px 300px !important;
+}
+
+.form_nameCoinInteres, .images {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.image {
+    width: 392px;
+    height: 230px;
+    margin-top: 10px;
 }
