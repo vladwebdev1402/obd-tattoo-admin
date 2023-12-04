@@ -18,14 +18,14 @@ const TemplateForm: FC<Props> = observer(
           values={ParseToDropdown(IdNameStore.data)}
           setCurrent={setCurrent}
           current={current}
-          title="city"
+          title="city*"
         />
         <Input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({ ...obj, name: e.target.value })
           }
           value={obj.name}
-          title="name"
+          title="name*"
         />
       </ContainerTemplateForm>
     );

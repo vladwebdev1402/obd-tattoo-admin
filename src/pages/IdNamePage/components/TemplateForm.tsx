@@ -8,7 +8,7 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
   return (
     <ContainerTemplateForm onEvent={submit}>
       <Input
-        title="name"
+        title="name*"
         value={obj.name}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setObj({ ...obj, name: e.target.value })

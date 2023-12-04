@@ -104,7 +104,8 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
             values={ParseToDropdown(brands)}
             current={curBrand}
             setCurrent={setCurBrand}
-            placeholder={"Выберите бренд*"}
+            placeholder={"Выберите бренд"}
+            title={"brand*"}
             inputPlaceholder="Поиск бренда"
             change={changeBrand}
           />
@@ -112,7 +113,8 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
             values={ParseToDropdown(categorys)}
             current={curCategory}
             setCurrent={setCurCategory}
-            placeholder={"Выберите категорию*"}
+            placeholder={"Выберите категорию"}
+            title={"category*"}
             inputPlaceholder="Поиск категории"
             change={changeCategory}
           />

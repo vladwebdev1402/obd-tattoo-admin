@@ -12,14 +12,14 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
           setObj({ ...obj, name: e.target.value })
         }
         value={obj.name}
-        title="name"
+        title="name*"
       />
       <Input
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setObj({ ...obj, promt: e.target.value })
         }
         value={obj.promt}
-        title="promt"
+        title="promt*"
       />
     </ContainerTemplateForm>
   );

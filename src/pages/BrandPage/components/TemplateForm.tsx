@@ -20,7 +20,7 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
           setObj({ ...obj, name: e.target.value })
         }
         value={obj.name}
-        title="name"
+        title="name*"
       />
       <div className={st.images}>
         {currImage && (

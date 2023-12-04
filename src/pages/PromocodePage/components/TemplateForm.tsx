@@ -18,21 +18,21 @@ const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
     <ContainerTemplateForm onEvent={submit}>
       <div className={st.inputs_namePromoDiscount}>
         <Input
-          title="name"
+          title="name*"
           value={obj.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({ ...obj, name: e.target.value })
           }
         />
         <Input
-          title="promocode"
+          title="promocode*"
           value={obj.promocode}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({ ...obj, promocode: e.target.value })
           }
         />
         <Input
-          title="discount"
+          title="discount*"
           value={obj.discount.toString()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({
@@ -46,7 +46,7 @@ const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
       </div>
 
       <Textarea
-        title="description"
+        title="description*"
         value={obj.description}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           setObj({ ...obj, description: e.target.value })

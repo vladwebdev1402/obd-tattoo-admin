@@ -17,7 +17,7 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
     <ContainerTemplateForm onSubmit={submit}>
       <div className={st.form_nameCoinInteres}>
         <Input
-          title="name"
+          title="name*"
           value={obj.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setObj({ ...obj, name: e.target.value })
@@ -62,7 +62,7 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
       </div>
 
       <Textarea
-        title="description"
+        title="description*"
         value={obj.description}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           setObj({ ...obj, description: e.target.value })
