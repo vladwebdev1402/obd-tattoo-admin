@@ -5,6 +5,7 @@ import React, { FC, useState } from "react";
 import TemplateForm from "./TemplateForm";
 import { IServiceImage } from "@/types/IServise";
 import { CheckImage } from "@/utils/CheckImage";
+import { GetFilenameFromUrl } from "@/utils/GetFilenameFromUrl";
 
 interface Props extends IEditrops {}
 
@@ -20,12 +21,13 @@ const Edit: FC<Props> = ({ current, setOpen }) => {
     if (
       service.name &&
       service.description &&
-      CheckImage(service.image) &&
       ((service.price.coin && service.price.coin > 0) ||
         (service.price.interest && service.price.interest > 0))
     ) {
-      const imageUrl = await ServiceStore.image(service.image);
-      ServiceStore.edit({ ...service, image: imageUrl });
+      const filename = CheckImage(service.image)
+        ? await ServiceStore.image(service.image)
+        : GetFilenameFromUrl(curService.image);
+      ServiceStore.edit({ ...service, image: filename });
       setService({
         _id: "",
         name: "",

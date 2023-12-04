@@ -3,6 +3,8 @@ import Modal from "@/UI/modal/Modal";
 import BrandStore from "@/store/BrandStore/BrandStore";
 import React, { FC, useMemo, useState } from "react";
 import TemplateForm from "./TemplateForm";
+import { CheckImage } from "@/utils/CheckImage";
+import { GetFilenameFromUrl } from "@/utils/GetFilenameFromUrl";
 interface Props {
   setOpen: (value: boolean) => void;
   current: string;
@@ -15,12 +17,11 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
   });
 
   const onEdit = async () => {
-    if (
-      edit.name &&
-      edit.image.getAll.length > 0 &&
-      !edit.image.getAll("file").includes("undefined")
-    ) {
-      const filename = await BrandStore.image(edit.image);
+    if (edit.name) {
+      const filename = CheckImage(edit.image)
+        ? await BrandStore.image(edit.image)
+        : GetFilenameFromUrl(brand.image);
+
       console.log(filename);
       await BrandStore.edit({
         ...brand,

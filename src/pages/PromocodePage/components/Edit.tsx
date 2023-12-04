@@ -4,6 +4,7 @@ import TemplateForm from "./TemplateForm";
 import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
 import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
 import { CheckImage } from "@/utils/CheckImage";
+import { GetFilenameFromUrl } from "@/utils/GetFilenameFromUrl";
 
 interface Props {
   setOpen: (value: boolean) => void;
@@ -27,10 +28,11 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
       promocode.name &&
       promocode.promocode &&
       promocode.description &&
-      CheckImage(promocode.image) &&
       promocode.discount > 0
     ) {
-      const filename = await PromocodeStore.image(promocode.image);
+      const filename = CheckImage(promocode.image)
+        ? await PromocodeStore.image(promocode.image)
+        : GetFilenameFromUrl(obj.image);
       await PromocodeStore.edit({ ...promocode, image: filename });
       setOpen(false);
     }
