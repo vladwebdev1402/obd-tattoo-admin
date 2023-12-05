@@ -5,6 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   isTitle?: boolean;
   onDelete?: () => void;
   onOpen?: () => void;
+  isTable?: boolean;
 }
 const TableRow: FC<Props> = ({
   fr,
@@ -13,11 +14,12 @@ const TableRow: FC<Props> = ({
   children,
   onDelete,
   onOpen,
+  isTable = true,
   ...props
 }) => {
   return (
     <div
-      className={`${st.row} ${
+      className={`${st.row} ${isTable ? st.row__table : st.row__block}${
         isTitle ? st.row__title : ""
       } ${className} fr-${fr}`}
       {...props}

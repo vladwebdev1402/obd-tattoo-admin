@@ -1,8 +1,26 @@
 .row {
     position: relative;
     display: grid;
-    
+
+   
+
+    &:hover:not(.row__title){
+        cursor: pointer;
+        .row__delete {
+            opacity: 1;
+        }
+    }
+
+   
+}
+
+.row__table {
     padding: 5px;
+    div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0px 5px;
+    }
 
     &:nth-child(2n) {
         background-color: var(--gray-row);
@@ -15,12 +33,27 @@
             opacity: 1;
         }
     }
+}
 
-    div {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 0px 5px;
+.row__block {
+    &::after{
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
+        background-color: var(--gray);
+        opacity:0;
+        z-index: -1;
+        transition: .3s;
     }
+
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }   
 }
 
 .row__title {

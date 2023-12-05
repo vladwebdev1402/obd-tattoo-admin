@@ -3,12 +3,14 @@ import st from "./DataContainer.module.scss";
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   error: string;
   isLoadingComplete: boolean;
+  condition?: number;
 }
 const DataContainer: FC<Props> = ({
   error,
   isLoadingComplete,
   children,
   className,
+  condition,
   ...props
 }) => {
   return (
@@ -21,11 +23,11 @@ const DataContainer: FC<Props> = ({
       )}
       {isLoadingComplete &&
         !error &&
-        React.Children.toArray(children).length > 1 &&
+        React.Children.toArray(children).length > (condition ?? 1) &&
         children}
       {isLoadingComplete &&
         !error &&
-        React.Children.toArray(children).length == 1 && (
+        React.Children.toArray(children).length == (condition ?? 1) && (
           <div className={st.data__empty}>
             В текущей таблице отсутствуют данные. Создайте коллекции
           </div>

@@ -21,9 +21,9 @@ import ImageInput from "@/UI/input/image/ImageInput";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
 
 const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
-  ({ obj, setObj, current = "", submit, currImage = "" }) => {
-    const [brands, setBrands] = useState<IBrand[]>([]);
-    const [categorys, setCategorys] = useState<IIdName[]>([]);
+  ({ obj, setObj, currImage = "" }) => {
+    const [brands, setBrands] = useState<IDropdownValue[]>([]);
+    const [categorys, setCategorys] = useState<IDropdownValue[]>([]);
     const [curBrand, setCurBrand] = useState<IDropdownValue>({
       name: "",
       value: "",
@@ -43,11 +43,27 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
 
     useEffect(() => {
       BrandStore.getAll().then((res) => {
-        console.log(res);
-        setBrands(res);
+        setBrands(ParseToDropdown(res));
       });
-      IdNameStore.getAll("category").then((res) => setCategorys(res));
+      IdNameStore.getAll("category").then((res) =>
+        setCategorys(ParseToDropdown(res))
+      );
     }, []);
+
+    useEffect(() => {
+      setCurBrand(
+        brands.filter((b) => b.value === obj.brand)[0] ?? {
+          name: "",
+          value: "",
+        }
+      );
+      setCurCategory(
+        categorys.filter((c) => c.value === obj.category)[0] ?? {
+          name: "",
+          value: "",
+        }
+      );
+    }, [categorys, brands]);
 
     return (
       <ContainerTemplateForm>
@@ -101,7 +117,7 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
         </div>
         <div className={st.create__menus_and_checkbox}>
           <DropdownMenu
-            values={ParseToDropdown(brands)}
+            values={brands}
             current={curBrand}
             setCurrent={setCurBrand}
             placeholder={"Выберите бренд"}
@@ -110,7 +126,7 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
             change={changeBrand}
           />
           <DropdownMenu
-            values={ParseToDropdown(categorys)}
+            values={categorys}
             current={curCategory}
             setCurrent={setCurCategory}
             placeholder={"Выберите категорию"}

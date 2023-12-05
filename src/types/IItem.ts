@@ -52,3 +52,13 @@ export const CheckItem = (item: IItemImage): boolean => {
     Boolean(item.description)
   );
 };
+
+export const CheckEditItem = (item: IItemImage): boolean => {
+  return (
+    Boolean(item.name) &&
+    Boolean(item.brand) &&
+    Boolean(item.category) &&
+    item.price > 0 &&
+    Boolean(item.description)
+  );
+};
