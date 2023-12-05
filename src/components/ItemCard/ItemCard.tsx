@@ -1,5 +1,5 @@
 import { IItem } from "@/types/IItem";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import st from "./ItemCard.module.scss";
 import ItemBlock from "./components/ItemBlock";
 import Checkbox from "@/UI/input/checkbox/Checkbox";
@@ -7,6 +7,11 @@ interface Props {
   item: IItem;
 }
 const ItemCard: FC<Props> = ({ item }) => {
+  const [openDescription, setOpenDescription] = useState(false);
+  const clickOpenDescription = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setOpenDescription(!openDescription);
+  };
   return (
     <div className={st.item}>
       <div className={st.item__head}>
@@ -47,7 +52,18 @@ const ItemCard: FC<Props> = ({ item }) => {
           <ItemBlock title="count">{item.count}</ItemBlock>
         </div>
         <ItemBlock title="description" className={st.item__description}>
-          {item.description}
+          {item.description
+            .split("\\n")
+            .splice(0, openDescription ? 100 : 1)
+            .map((d, idx) => (
+              <p key={idx}>{d}</p>
+            ))}
+          <button
+            className={st.item__description__open}
+            onClick={clickOpenDescription}
+          >
+            {openDescription ? "Свернуть описание" : "Развернуть описание"}
+          </button>
         </ItemBlock>
       </div>
     </div>

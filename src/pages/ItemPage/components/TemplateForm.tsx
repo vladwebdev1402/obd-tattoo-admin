@@ -10,11 +10,8 @@ import DropdownMenu from "@/UI/DropdownMenu/DropdownMenu";
 import { ParseToDropdown } from "@/utils/ParseToDropdown";
 import BrandStore from "@/store/BrandStore/BrandStore";
 import IdNameStore from "@/store/IdNameStore";
-import IIdName from "@/types/IIdName";
-import { IBrand } from "@/types/IBrand";
 import IDropdownValue from "@/types/IDropdownValue";
 import { observer } from "mobx-react-lite";
-import { CheckImage } from "@/utils/CheckImage";
 import Checkbox from "@/UI/input/checkbox/Checkbox";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import ImageInput from "@/UI/input/image/ImageInput";
@@ -63,7 +60,7 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
           value: "",
         }
       );
-    }, [categorys, brands]);
+    }, [categorys, brands, obj]);
 
     return (
       <ContainerTemplateForm>

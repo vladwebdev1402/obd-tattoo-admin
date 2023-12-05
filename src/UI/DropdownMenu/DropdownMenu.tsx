@@ -26,13 +26,13 @@ const DropdownMenu: FC<Props> = ({
   ...props
 }) => {
   const ref = useRef(null);
-  const [name, setName] = useState(current?.name ?? "");
+  const [search, setSearch] = useState(current?.name ?? "");
   const { open, setOpen } = useClose(ref);
 
   const getFilter = (obj: IDropdownValue) => {
     return (
-      obj.name.toLowerCase().includes(name) ||
-      obj.value.toLowerCase().includes(name) ||
+      obj.name.toLowerCase().includes(search) ||
+      obj.value.toLowerCase().includes(search) ||
       false
     );
   };
@@ -51,7 +51,7 @@ const DropdownMenu: FC<Props> = ({
       <div
         className={st.menu__head}
         onClick={() => {
-          setName("");
+          setSearch("");
           setOpen(!open);
         }}
       >
@@ -64,9 +64,9 @@ const DropdownMenu: FC<Props> = ({
             placeholder={
               current && current.name ? current.name : inputPlaceholder
             }
-            value={name}
+            value={search}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
+              setSearch(e.target.value)
             }
           />
         )}

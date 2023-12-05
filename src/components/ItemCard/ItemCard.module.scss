@@ -45,3 +45,13 @@
 .item__description {
     margin-top: 20px;
 }
+
+.item__description__open {
+    background-color: transparent;
+    color: var(--orange);
+    font-size: 17px;
+    transition: .3s;
+    &:hover {
+        color: var(--dark-orange);
+    }
+}
