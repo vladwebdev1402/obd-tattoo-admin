@@ -55,7 +55,7 @@ const AppRouter = observer(() => {
   useEffect(() => {
     setTimeout(() => {
       AuthStore.checkAuth();
-    }, 5000);
+    }, 100);
   }, []);
   return AuthStore.isLoadingComplete ? (
     AuthStore.auth ? (

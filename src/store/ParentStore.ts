@@ -25,7 +25,7 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
         this.error = "";
     
         try {
-          this.data = await CrudApi.getAll<T>(link);
+          this.data = (await CrudApi.getAll<T>(link)).data;
           this.isLoadingComplete = true;
           this.error = "";
           return this.data;
@@ -63,7 +63,7 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
      
     create = async (link: string, payload: T) => {
         try {
-          const data = await CrudApi.create<T>(link, {...payload});
+          const data = (await CrudApi.create<T>(link, {...payload})).data;
           this.data.push(data);
           this.error = "";
         } catch (e) {
@@ -117,7 +117,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
     this.isLoadingComplete = false;
     this.error = "";
     try {
-      this.data = await CrudApi.getAll<T>(this.link);
+      this.data = (await CrudApi.getAll<T>(this.link)).data;
       this.isLoadingComplete = true;
       this.error = "";
       return this.data;
@@ -152,7 +152,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
 
   create = async (payload: T) => {
     try {
-      const data = await CrudApi.create<T>(this.link, payload);
+      const data = (await CrudApi.create<T>(this.link, payload)).data;
       this.data.push(data);
       this.error = "";
     } catch (e) {
@@ -188,9 +188,9 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
 
   image = async (image: FormData): Promise<string> => {
     try {
-      const filename = await CrudApi.image(image);
+      const response = await CrudApi.image(image);
       this.error = "";
-      return filename;
+      return response.filename;
     } catch (e) {
       if (typeof e === "string") {
         this.error = e.toUpperCase();
