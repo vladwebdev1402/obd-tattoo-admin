@@ -1,4 +1,4 @@
-import CrudApi from "@/API/CrudApi";
+import { CrudApi } from "@/API";
 import IIdName from "@/types/IIdName";
 import IStore from "@/types/IStore";
 import {makeObservable, observable} from "mobx";

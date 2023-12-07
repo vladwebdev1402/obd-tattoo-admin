@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import st from "./Input.module.scss";
 
-interface MyInputProps extends React.HTMLAttributes<HTMLDivElement> {
+interface MyInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
   value: string;
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;

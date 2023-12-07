@@ -1,14 +1,20 @@
+import AuthRoot from "@/pages/AuthRoot/AuthRoot";
 import BrandPage from "@/pages/BrandPage/BrandPage";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import IdNamePage from "@/pages/IdNamePage/IdNamePage";
 import ItemPage from "@/pages/ItemPage/ItemPage";
+import LoginPage from "@/pages/LoginPage/LoginPage";
 import MainPage from "@/pages/MainPage/MainPage";
 import NamePromtPage from "@/pages/NamePromtPage";
 import PromocodePage from "@/pages/PromocodePage/PromocodePage";
 import Root from "@/pages/Root/Root";
 import ServicePage from "@/pages/ServicesPage/ServicePage";
+import SignPage from "@/pages/SignPage/SignPage";
 import StreetPage from "@/pages/StreetPage/StreetPage";
-import React from "react";
+import AuthStore from "@/store/AuthStore/AuthStore";
+import { observer } from "mobx-react-lite";
+import st from "./AppRouter.module.scss";
+import React, { useEffect } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,7 +22,7 @@ import {
   Route,
 } from "react-router-dom";
 
-const router = createBrowserRouter(
+const privateRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<MainPage />} />
@@ -35,8 +41,31 @@ const router = createBrowserRouter(
   )
 );
 
-const AppRouter = () => {
-  return <RouterProvider router={router} />;
-};
+const publicRouter = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AuthRoot />}>
+      <Route index element={<LoginPage />} />
+      <Route path="/signup" element={<SignPage />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Route>
+  )
+);
+
+const AppRouter = observer(() => {
+  useEffect(() => {
+    setTimeout(() => {
+      AuthStore.checkAuth();
+    }, 5000);
+  }, []);
+  return AuthStore.isLoadingComplete ? (
+    AuthStore.auth ? (
+      <RouterProvider router={privateRouter} />
+    ) : (
+      <RouterProvider router={publicRouter} />
+    )
+  ) : (
+    <div className={st.loader}></div>
+  );
+});
 
 export default AppRouter;
