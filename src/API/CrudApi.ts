@@ -3,8 +3,11 @@ import { apiUrl } from "./url";
 
 export default class CrudApi {
     
-    static getAll = async <T>(link: string): Promise<{data: T[], message: string}> => {
-      const data = await fetch(apiUrl + link, {
+    static getAll = async <T>(link: string, query?: any): Promise<{data: T[], message: string}> => {
+      const queryString = query ? new URLSearchParams(query) : "";
+      const url = apiUrl + link + `${query ? "?" + queryString : ""}`
+      console.log(url)
+      const data = await fetch(url, {
         headers: {
           "Authorization": TokenApi.getToken()
         },

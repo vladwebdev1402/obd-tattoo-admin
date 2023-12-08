@@ -11,7 +11,7 @@ const ItemPage = observer(() => {
   const [currentid, setCurrentId] = useState("");
 
   useEffect(() => {
-    ItemStore.getAll();
+    ItemStore.getAll({ limit: 500 });
   }, []);
 
   return (

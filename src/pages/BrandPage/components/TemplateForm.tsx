@@ -1,4 +1,3 @@
-import { apiUrl } from "@/API/url";
 import ContainerTemplateForm from "@/UI/ContainerTemplateForm/ContainerTemplateForm";
 import Input from "@/UI/input/Input";
 import ImageInput from "@/UI/input/image/ImageInput";

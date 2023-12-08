@@ -20,12 +20,12 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
         })
     }
     
-    getAll = async (link: string): Promise<T[]> => {
+    getAll = async (link: string, query?: any): Promise<T[]> => {
         this.isLoadingComplete = false;
         this.error = "";
     
         try {
-          this.data = (await CrudApi.getAll<T>(link)).data;
+          this.data = (await CrudApi.getAll<T>(link, query)).data;
           this.isLoadingComplete = true;
           this.error = "";
           return this.data;
@@ -113,11 +113,11 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
         })
     }
     
-  getAll = async () => {
+  getAll = async (query?: any) => {
     this.isLoadingComplete = false;
     this.error = "";
     try {
-      this.data = (await CrudApi.getAll<T>(this.link)).data;
+      this.data = (await CrudApi.getAll<T>(this.link, query)).data;
       this.isLoadingComplete = true;
       this.error = "";
       return this.data;
