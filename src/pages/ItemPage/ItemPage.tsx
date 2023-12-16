@@ -5,6 +5,8 @@ import { observer } from "mobx-react-lite";
 import HeadDataContainer from "@/components/HeadDataContainer/HeadDataContainer";
 import ItemStore from "@/store/ItemStore/ItemStore";
 import Edit from "./components/Edit";
+import BrandStore from "@/store/BrandStore/BrandStore";
+import IdNameStore from "@/store/IdNameStore";
 
 const ItemPage = observer(() => {
   const [open, setOpen] = useState(false);
@@ -12,6 +14,8 @@ const ItemPage = observer(() => {
 
   useEffect(() => {
     ItemStore.getAll({ limit: 500 });
+    BrandStore.getAll();
+    IdNameStore.getAll("category");
   }, []);
 
   return (

@@ -39,13 +39,9 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
     };
 
     useEffect(() => {
-      BrandStore.getAll().then((res) => {
-        setBrands(ParseToDropdown(res));
-      });
-      IdNameStore.getAll("category").then((res) =>
-        setCategorys(ParseToDropdown(res))
-      );
-    }, []);
+      setBrands(ParseToDropdown(BrandStore.data));
+      setCategorys(ParseToDropdown(IdNameStore.data));
+    }, [IdNameStore.data, BrandStore.data]);
 
     useEffect(() => {
       setCurBrand(
