@@ -53,7 +53,7 @@ const ItemCard: FC<Props> = ({ item }) => {
         </div>
         <ItemBlock title="description" className={st.item__description}>
           {item.description
-            .split("\\n")
+            .split("/n")
             .splice(0, openDescription ? 100 : 1)
             .map((d, idx) => (
               <p key={idx}>{d}</p>

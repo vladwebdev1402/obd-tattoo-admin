@@ -169,7 +169,7 @@ export class ParentStore<T extends IIdName> implements IStore<T>{
 
   edit = async (payload: T) => {
     try {
-      const data = await CrudApi.edit<T>(this.link, payload);
+      const data = (await CrudApi.edit<T>(this.link, payload)).data;
       this.data = this.data.map((d) =>
         d._id === payload._id ? { ...d, ...data } : d
       );

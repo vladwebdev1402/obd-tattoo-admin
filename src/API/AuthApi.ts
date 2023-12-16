@@ -1,3 +1,4 @@
+import { TokenApi } from "./TokenApi";
 import { authUrl } from "./url";
 
 export class AuthApi {
@@ -21,6 +22,18 @@ export class AuthApi {
             body: JSON.stringify({login, password}),
             headers: {
                 "Content-Type": "application/json"
+            }
+        }).then(response => response.json())
+
+        return response;
+    }
+
+    static checkAuth = async (): Promise<{message: string, successfully: boolean}> => {
+        const response = await fetch(authUrl + "check/admin", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": TokenApi.getToken()
             }
         }).then(response => response.json())
 
