@@ -1,0 +1,18 @@
+.report {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.report__buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 30px;
+    justify-content: space-around;
+}
+
+.btn {
+    height: 60px;
+    max-width: 370px;
+}

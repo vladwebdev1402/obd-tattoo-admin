@@ -6,13 +6,12 @@ export default class CrudApi {
     static getAll = async <T>(link: string, query?: any): Promise<{data: T[], message: string}> => {
       const queryString = query ? new URLSearchParams(query) : "";
       const url = apiUrl + link + `${query ? "?" + queryString : ""}`
-      console.log(url)
-      const data = await fetch(url, {
+      const response = await fetch(url, {
         headers: {
           "Authorization": TokenApi.getToken()
         },
       }).then(res => res.json());
-        return data
+      return response
     }
 
     static create = async <T>(link: string, payload: T): Promise<{data: T, message: string}> => {
@@ -24,7 +23,7 @@ export default class CrudApi {
             method: "POST",
             body: JSON.stringify({...payload}),
           }).then((res) => res.json());
-          return response;
+        return response;
     }
 
     static delete = async <T>(link: string,  _id: string): Promise<{data: T, message: string}> => {

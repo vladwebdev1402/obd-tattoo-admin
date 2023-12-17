@@ -7,6 +7,7 @@ import ItemStore from "@/store/ItemStore/ItemStore";
 import Edit from "./components/Edit";
 import BrandStore from "@/store/BrandStore/BrandStore";
 import IdNameStore from "@/store/IdNameStore";
+import Report from "./components/Report";
 
 const ItemPage = observer(() => {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ const ItemPage = observer(() => {
   return (
     <section className={`container`}>
       <Create />
+      <Report />
       <HeadDataContainer />
       <Data setOpen={setOpen} setCurrent={setCurrentId} />
       {open && <Edit setOpen={setOpen} current={currentid} />}

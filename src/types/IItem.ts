@@ -22,6 +22,20 @@ export interface IItem extends IIdName, Item {
 
 export interface IItemImage extends IIdName, Item, IImage {}
 
+export interface IItemParams {
+  limit?: number;
+  name?: string;
+  startPrice?: number;
+  endPrice?: number;
+  category?: string;
+  brand?: string;
+  no?: boolean;
+  promotion?: boolean;
+  news?: boolean;
+  discount?: boolean;
+  hot?: boolean;
+}
+
 export const GenerateItemImage = (): IItemImage => {
   return {
     _id: "",
@@ -41,6 +55,22 @@ export const GenerateItemImage = (): IItemImage => {
     price: 0,
   };
 };
+
+
+export const GenerateItemParams = (): IItemParams => {
+  return {
+    limit: 500,
+    name: "",
+    category: "",
+    brand: "",
+    no: false,
+    promotion: false,
+    news: false,
+    discount: false,
+    hot: false,
+  };
+};
+
 
 export const CheckItem = (item: IItemImage): boolean => {
   return (
