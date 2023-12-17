@@ -23,7 +23,7 @@ const ReportMessage: FC<Props> = ({
 
       {!isLoadingComplete && "Загрузка данных"}
 
-      {isLoadingComplete && error && "При загрузке данных произошла ошибка"}
+      {isLoadingComplete && error}
     </div>
   );
 };

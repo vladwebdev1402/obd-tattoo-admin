@@ -9,6 +9,7 @@ export const useFetch = <T>(callback: () => Promise<T[]>) => {
         setIsLoadingComplete(false);
         try {
             const response = await callback();
+            setError("")
             setData(response);
         }
         catch (err) {

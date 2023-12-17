@@ -8,8 +8,8 @@ import { CrudApi } from "@/API";
 import { GenerateItemParams, IItem, IItemParams } from "@/types/IItem";
 import st from "./st.module.scss";
 import { CrateParamsFromFilter } from "../../utils/CreateParamsFromFiltes";
-import ReportMessage from "@/pages/ReportUI/ReportMessage";
-import DownloadLink from "@/pages/ReportUI/DownloadLink";
+import ReportMessage from "@/UI/ReportUI/ReportMessage";
+import DownloadLink from "@/UI/ReportUI/DownloadLink";
 const Report = () => {
   const [filters, setFilters] = useState<IItemParams>(GenerateItemParams());
   const { fething, data, setData, error, isLoadingComplete } = useFetch(

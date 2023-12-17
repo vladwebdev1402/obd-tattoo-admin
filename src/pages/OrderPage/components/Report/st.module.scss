@@ -1,0 +1,26 @@
+.filter {
+  display: flex;
+  gap: 20px;
+}
+
+.filter__date {
+  input {
+    border: none;
+    background-color: #f5f5f5;
+    color: var(--dark-orange);
+    &::-webkit-datetime-edit {
+      padding: 15px 10px 15px 10px;
+    }
+
+    &:focus {
+        outline: none;
+      }
+  }
+
+  
+}
+
+.filter__title {
+  font-size: 17px;
+  color: var(--txt-gray2);
+}
