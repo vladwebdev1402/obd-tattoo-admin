@@ -1,4 +1,3 @@
-import { CrudApi } from "@/API";
 import {useState} from "react"
 
 export const useFetch = <T>(callback: () => Promise<T[]>) => {
@@ -22,5 +21,5 @@ export const useFetch = <T>(callback: () => Promise<T[]>) => {
     }
     
 
-    return {fething, data, error, isLoadingComplete};
+    return {fething, data, setData, error, isLoadingComplete};
 }

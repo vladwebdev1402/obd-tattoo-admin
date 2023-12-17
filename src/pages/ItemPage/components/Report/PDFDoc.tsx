@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import {
   View,
   Text,
-  PDFDownloadLink,
   StyleSheet,
   Image,
   Page,

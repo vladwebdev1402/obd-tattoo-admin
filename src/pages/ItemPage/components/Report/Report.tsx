@@ -10,13 +10,15 @@ import st from "./st.module.scss";
 import { CrateParamsFromFilter } from "../../utils/CreateParamsFromFiltes";
 const Report = () => {
   const [filters, setFilters] = useState<IItemParams>(GenerateItemParams());
-  const { fething, data, error, isLoadingComplete } = useFetch(async () => {
-    const response = await CrudApi.getAll<IItem>(
-      "/item",
-      CrateParamsFromFilter(filters)
-    );
-    return response.data;
-  });
+  const { fething, data, setData, error, isLoadingComplete } = useFetch(
+    async () => {
+      const response = await CrudApi.getAll<IItem>("/item", {
+        ...CrateParamsFromFilter(filters),
+        limit: 10000,
+      });
+      return response.data;
+    }
+  );
 
   const MyDoc = () => <PDFDoc items={data} />;
   const ref = useRef<HTMLParagraphElement>(null);
@@ -27,6 +29,7 @@ const Report = () => {
 
   const onGet = () => {
     fething();
+    setData([]);
   };
 
   return (
