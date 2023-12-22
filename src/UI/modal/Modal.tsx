@@ -36,7 +36,6 @@ const Modal: FC<Props> = ({
         <ClipButton
           className={st.modal__save}
           onClick={() => {
-            setOpen(false);
             onEdit();
           }}
           theme="dark"

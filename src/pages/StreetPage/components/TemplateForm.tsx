@@ -7,9 +7,17 @@ import { ITemplateFormProps } from "@/types/Props";
 import { ParseToDropdown } from "@/utils/ParseToDropdown";
 import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
+import Message from "@/UI/Message/Message";
 interface Props extends ITemplateFormProps<IStreet> {}
 const TemplateForm: FC<Props> = observer(
-  ({ obj, setObj, submit, current = null, setCurrent = () => {} }) => {
+  ({
+    obj,
+    setObj,
+    submit,
+    current = null,
+    message = "",
+    setCurrent = () => {},
+  }) => {
     return (
       <ContainerTemplateForm onEvent={submit}>
         <DropdownMenu
@@ -27,6 +35,7 @@ const TemplateForm: FC<Props> = observer(
           value={obj.name}
           title="name*"
         />
+        <Message>{message}</Message>
       </ContainerTemplateForm>
     );
   }

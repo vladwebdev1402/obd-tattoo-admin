@@ -7,11 +7,19 @@ import { ITemplateFormProps } from "@/types/Props";
 import React, { FC } from "react";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
+import Message from "@/UI/Message/Message";
 interface Props extends ITemplateFormProps<IBrandImage> {
   currImage?: string;
+  message?: string;
 }
 
-const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
+const TemplateForm: FC<Props> = ({
+  currImage = "",
+  obj,
+  message = "",
+  setObj,
+  submit,
+}) => {
   return (
     <ContainerTemplateForm onEvent={submit}>
       <Input
@@ -32,6 +40,7 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
           className={st.image}
         />
       </div>
+      <Message>{message}</Message>
     </ContainerTemplateForm>
   );
 };

@@ -9,11 +9,18 @@ import ImageInput from "@/UI/input/image/ImageInput";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import Textarea from "@/UI/textarea/Textarea";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
+import Message from "@/UI/Message/Message";
 interface Props extends ITemplateFormProps<IPromocodeImage> {
   currImage?: string;
 }
 
-const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
+const TemplateForm: FC<Props> = ({
+  currImage,
+  obj,
+  setObj,
+  submit,
+  message,
+}) => {
   return (
     <ContainerTemplateForm onEvent={submit}>
       <div className={st.inputs_namePromoDiscount}>
@@ -64,6 +71,7 @@ const TemplateForm: FC<Props> = ({ currImage, obj, setObj, submit }) => {
           className={st.image}
         />
       </div>
+      <Message>{message}</Message>
     </ContainerTemplateForm>
   );
 };

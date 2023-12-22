@@ -1,11 +1,10 @@
-import Input from "@/UI/input/Input";
 import CreateContainer from "@/components/CreateContainer/CreateContainer";
-import IdNameStore from "@/store/IdNameStore";
 import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
-import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
-import React, { useState } from "react";
+import { IPromocodeImage } from "@/types/IPromocode";
+import React, { useState, useCallback } from "react";
 import TemplateForm from "./TemplateForm";
 import { CheckImage } from "@/utils/CheckImage";
+import { useMessage } from "@/hooks/useMessage";
 
 const Create = () => {
   const [promocode, setPromocode] = useState<IPromocodeImage>({
@@ -17,30 +16,44 @@ const Create = () => {
     image: new FormData(),
   });
 
-  const onCreate = async () => {
-    if (
-      promocode.name &&
-      promocode.promocode &&
-      promocode.description &&
+  const check = useCallback(
+    () =>
+      Boolean(promocode.name) &&
+      Boolean(promocode.promocode) &&
+      Boolean(promocode.description) &&
       CheckImage(promocode.image) &&
-      promocode.discount > 0
-    ) {
-      const filename = await PromocodeStore.image(promocode.image);
-      PromocodeStore.create({ ...promocode, image: filename });
-      setPromocode({
-        _id: "",
-        name: "",
-        promocode: "",
-        description: "",
-        discount: 0,
-        image: new FormData(),
-      });
-    }
-  };
+      promocode.discount > 0,
+    [promocode]
+  );
+
+  const onCreate = useCallback(async () => {
+    const filename = await PromocodeStore.image(promocode.image);
+    PromocodeStore.create({ ...promocode, image: filename });
+    setPromocode({
+      _id: "",
+      name: "",
+      promocode: "",
+      description: "",
+      discount: 0,
+      image: new FormData(),
+    });
+  }, [promocode]);
+
+  const { func, message } = useMessage(
+    check,
+    onCreate,
+    "Новая коллекция успешно создана",
+    "Заполните все обязательные поля, включая изображение"
+  );
 
   return (
-    <CreateContainer onCreate={onCreate}>
-      <TemplateForm submit={onCreate} setObj={setPromocode} obj={promocode} />
+    <CreateContainer onCreate={func}>
+      <TemplateForm
+        submit={func}
+        setObj={setPromocode}
+        obj={promocode}
+        message={message}
+      />
     </CreateContainer>
   );
 };

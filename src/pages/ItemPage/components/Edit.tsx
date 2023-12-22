@@ -6,6 +6,7 @@ import { CheckImage } from "@/utils/CheckImage";
 import { GetFilenameFromUrl } from "@/utils/GetFilenameFromUrl";
 import React, { FC, useState } from "react";
 import TemplateForm from "./TemplateForm";
+import { useMessage } from "@/hooks/useMessage";
 interface Props extends IEditrops {}
 const Edit: FC<Props> = ({ current, setOpen }) => {
   const curItem = ItemStore.data.filter((i) => i._id === current)[0];
@@ -14,8 +15,9 @@ const Edit: FC<Props> = ({ current, setOpen }) => {
     image: new FormData(),
   });
 
-  const onEdit = async () => {
-    if (CheckEditItem(obj)) {
+  const { func, message } = useMessage(
+    () => CheckEditItem(obj),
+    async () => {
       if (CheckImage(obj.image)) {
         const filename = await ItemStore.image(obj.image);
         await ItemStore.edit({ ...obj, image: filename });
@@ -24,12 +26,20 @@ const Edit: FC<Props> = ({ current, setOpen }) => {
           ...obj,
           image: GetFilenameFromUrl(curItem.image),
         });
-    }
-  };
+      setOpen(false);
+    },
+    "",
+    "Заполните все обязательные поля, включая изображение"
+  );
 
   return (
-    <Modal setOpen={setOpen} onEdit={onEdit}>
-      <TemplateForm currImage={curItem.image} setObj={setObj} obj={obj} />
+    <Modal setOpen={setOpen} onEdit={func}>
+      <TemplateForm
+        currImage={curItem.image}
+        setObj={setObj}
+        obj={obj}
+        message={message}
+      />
     </Modal>
   );
 };

@@ -2,6 +2,7 @@ import Modal from "@/UI/modal/Modal";
 import NamePromtStore from "@/store/NamePromtStore";
 import React, { FC, useState } from "react";
 import TemplateForm from "./TemplateForm";
+import { useMessage } from "@/hooks/useMessage";
 interface Props {
   link: string;
   setOpen: (value: boolean) => void;
@@ -15,18 +16,28 @@ const Edit: FC<Props> = ({ link, setOpen, current }) => {
     ...obj,
   });
 
-  const onEdit = async () => {
-    if (editObj.name && editObj.promt) {
+  const { func, message } = useMessage(
+    () => editObj.name !== "" && editObj.promt !== "",
+    async () => {
       await NamePromtStore.edit(link, {
         _id: obj._id,
         name: editObj.name,
         promt: editObj.promt,
       });
-    }
-  };
+      setOpen(false);
+    },
+    "",
+    "Заполните все обязательные поля"
+  );
+
   return (
-    <Modal onEdit={onEdit} setOpen={setOpen}>
-      <TemplateForm submit={onEdit} obj={editObj} setObj={setEditObj} />
+    <Modal onEdit={func} setOpen={setOpen}>
+      <TemplateForm
+        submit={func}
+        obj={editObj}
+        setObj={setEditObj}
+        message={message}
+      />
     </Modal>
   );
 };

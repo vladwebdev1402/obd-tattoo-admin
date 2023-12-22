@@ -9,10 +9,17 @@ import React, { FC } from "react";
 import st from "./st.module.scss";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
 import Textarea from "@/UI/textarea/Textarea";
+import Message from "@/UI/Message/Message";
 interface Props extends ITemplateFormProps<IServiceImage> {
   currImage?: string;
 }
-const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
+const TemplateForm: FC<Props> = ({
+  currImage = "",
+  obj,
+  setObj,
+  submit,
+  message,
+}) => {
   return (
     <ContainerTemplateForm onSubmit={submit}>
       <div className={st.form_nameCoinInteres}>
@@ -79,6 +86,7 @@ const TemplateForm: FC<Props> = ({ currImage = "", obj, setObj, submit }) => {
           className={st.image}
         />
       </div>
+      <Message>{message}</Message>
     </ContainerTemplateForm>
   );
 };

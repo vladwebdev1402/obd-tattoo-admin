@@ -1,10 +1,11 @@
 import ContainerTemplateForm from "@/UI/ContainerTemplateForm/ContainerTemplateForm";
+import Message from "@/UI/Message/Message";
 import Input from "@/UI/input/Input";
 import IIdName from "@/types/IIdName";
 import { ITemplateFormProps } from "@/types/Props";
 import React, { FC } from "react";
 interface Props extends ITemplateFormProps<IIdName> {}
-const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
+const TemplateForm: FC<Props> = ({ obj, message = "", setObj, submit }) => {
   return (
     <ContainerTemplateForm onEvent={submit}>
       <Input
@@ -14,6 +15,7 @@ const TemplateForm: FC<Props> = ({ obj, setObj, submit }) => {
           setObj({ ...obj, name: e.target.value })
         }
       />
+      <Message>{message}</Message>
     </ContainerTemplateForm>
   );
 };

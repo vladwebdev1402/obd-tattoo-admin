@@ -16,9 +16,10 @@ import Checkbox from "@/UI/input/checkbox/Checkbox";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import ImageInput from "@/UI/input/image/ImageInput";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
+import Message from "@/UI/Message/Message";
 
 const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
-  ({ obj, setObj, currImage = "" }) => {
+  ({ obj, setObj, currImage = "", message }) => {
     const [brands, setBrands] = useState<IDropdownValue[]>([]);
     const [categorys, setCategorys] = useState<IDropdownValue[]>([]);
     const [curBrand, setCurBrand] = useState<IDropdownValue>({
@@ -173,6 +174,7 @@ const TemplateForm: FC<ITemplateFormProps<IItemImage>> = observer(
             data={obj.image}
           />
         </div>
+        <Message>{message}</Message>
       </ContainerTemplateForm>
     );
   }

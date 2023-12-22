@@ -1,10 +1,11 @@
 import Modal from "@/UI/modal/Modal";
-import React, { FC, useState } from "react";
+import React, { FC, useState, useCallback } from "react";
 import TemplateForm from "./TemplateForm";
 import PromocodeStore from "@/store/PromocodeStore/PromocodeStore";
-import { IPromocode, IPromocodeImage } from "@/types/IPromocode";
+import { IPromocodeImage } from "@/types/IPromocode";
 import { CheckImage } from "@/utils/CheckImage";
 import { GetFilenameFromUrl } from "@/utils/GetFilenameFromUrl";
+import { useMessage } from "@/hooks/useMessage";
 
 interface Props {
   setOpen: (value: boolean) => void;
@@ -23,27 +24,38 @@ const Edit: FC<Props> = ({ setOpen, current }) => {
     image: new FormData(),
   });
 
-  const onEdit = async () => {
-    if (
-      promocode.name &&
-      promocode.promocode &&
-      promocode.description &&
-      promocode.discount > 0
-    ) {
-      const filename = CheckImage(promocode.image)
-        ? await PromocodeStore.image(promocode.image)
-        : GetFilenameFromUrl(obj.image);
-      await PromocodeStore.edit({ ...promocode, image: filename });
-      setOpen(false);
-    }
-  };
+  const check = useCallback(
+    () =>
+      Boolean(promocode.name) &&
+      Boolean(promocode.promocode) &&
+      Boolean(promocode.description) &&
+      promocode.discount > 0,
+    [promocode]
+  );
+
+  const onEdit = useCallback(async () => {
+    const filename = CheckImage(promocode.image)
+      ? await PromocodeStore.image(promocode.image)
+      : GetFilenameFromUrl(obj.image);
+    await PromocodeStore.edit({ ...promocode, image: filename });
+    setOpen(false);
+  }, [promocode, obj]);
+
+  const { func, message } = useMessage(
+    check,
+    onEdit,
+    "",
+    "Заполните все обязательные поля. Изображение загружать необязательно"
+  );
+
   return (
-    <Modal onEdit={onEdit} setOpen={setOpen}>
+    <Modal onEdit={func} setOpen={setOpen}>
       <TemplateForm
         currImage={obj.image}
         setObj={setPromocode}
         obj={promocode}
-        submit={onEdit}
+        submit={func}
+        message={message}
       />
     </Modal>
   );
