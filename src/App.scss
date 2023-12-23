@@ -110,6 +110,10 @@ button {
   grid-template-columns: repeat(6, 1fr);
 }
 
+.fr-9 {
+  grid-template-columns: repeat(9, 1fr);
+}
+
 .block-scroll {
   overflow: hidden;
 }

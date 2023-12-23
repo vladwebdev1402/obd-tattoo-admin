@@ -8,10 +8,7 @@ import React, { FC } from "react";
 import ImageContainer from "@/UI/ImageContainer/ImageContainer";
 import { ChangeImage } from "@/UI/input/image/ChangeImage";
 import Message from "@/UI/Message/Message";
-interface Props extends ITemplateFormProps<IBrandImage> {
-  currImage?: string;
-  message?: string;
-}
+interface Props extends ITemplateFormProps<IBrandImage> {}
 
 const TemplateForm: FC<Props> = ({
   currImage = "",

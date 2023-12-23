@@ -16,6 +16,9 @@ export const useMessage = (
       } else {
         setMessage(failedMsg);
       }
+      setTimeout(() => {
+        setMessage("")
+      }, 3000)
     },
     message,
   };

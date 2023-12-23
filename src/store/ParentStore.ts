@@ -82,8 +82,8 @@ export class ParentStoreWithLink<T extends IIdName> implements IStore<T>{
         try {
           const data = await CrudApi.edit<T>(link, payload);
           this.data = this.data.map((d) =>
-            d._id === payload._id ? { ...d, ...payload } : d
-          );
+          d._id === payload._id ? { ...d, ...data } : d
+        );
           this.error = "";
         } catch (e) {
           if (typeof e === "string") {

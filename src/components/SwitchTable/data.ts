@@ -57,4 +57,9 @@ export const tables: ITable[] = [
         link: "item",
         name: "Товары"
     },
+    { 
+        class: false,
+        link: "manager",
+        name: "Менеджеры"
+    },
 ] 

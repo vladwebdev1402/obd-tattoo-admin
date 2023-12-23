@@ -22,6 +22,7 @@ import {
   Route,
 } from "react-router-dom";
 import OrderPage from "@/pages/OrderPage/OrderPage";
+import ManagerPage from "@/pages/ManagerPage/ManagerPage";
 
 const privateRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,7 @@ const privateRouter = createBrowserRouter(
       <Route path="service" element={<ServicePage />} />
       <Route path="item" element={<ItemPage />} />
       <Route path="order" element={<OrderPage />} />
+      <Route path="manager" element={<ManagerPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

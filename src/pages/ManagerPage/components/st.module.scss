@@ -1,0 +1,16 @@
+.images {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.form__row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.image {
+    width: 220px;
+    height: 220px;
+}

@@ -26,12 +26,12 @@ const TableRow: FC<Props> = ({
       onClick={() => onOpen && onOpen()}
     >
       {children}
-      {!isTitle ? (
+      {!isTitle && onDelete ? (
         <button
           className={st.row__delete}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
-            onDelete && onDelete();
+            onDelete();
           }}
         ></button>
       ) : (

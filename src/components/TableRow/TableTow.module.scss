@@ -2,8 +2,6 @@
     position: relative;
     display: grid;
 
-   
-
     &:hover:not(.row__title){
         cursor: pointer;
         .row__delete {
